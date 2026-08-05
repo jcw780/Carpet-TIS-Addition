@@ -44,7 +44,7 @@ public class OFEMUtil
 	{
 		boolean movementOk =
 				movement.lengthSqr() >= OPTIMIZE_MOVEMENT_THRESHOLD_SQR &&  // basic requirement
-				movement.x * movement.y * movement.z > (movement.x + movement.y + movement.z) * OVERSIZED_OVERHEAD_FACTOR;
+				Math.abs(movement.x) * Math.abs(movement.y) * Math.abs(movement.z) > (Math.abs(movement.x) + Math.abs(movement.y) + Math.abs(movement.z)) * OVERSIZED_OVERHEAD_FACTOR;
 		return movementOk || CarpetTISAdditionSettings.ultraSecretSetting.equals("optimizedFastEntityMovement");
 	}
 
