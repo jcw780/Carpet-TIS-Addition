@@ -39,7 +39,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class FishingHookMixin {
     //#if MC < 1.16.5
     @Inject(method = "method_18060", at = @At("HEAD"), cancellable = true)
-    private static void checkCreativeNoClipNoImpact(Entity entity, CallbackInfoReturnable<Boolean> cir) {
+    private static void checkCreativeNoClipNoProjectileImpact(Entity entity, CallbackInfoReturnable<Boolean> cir) {
         if (CreativeNoClipHelper.isNoClipPlayer(entity) && CarpetTISAdditionSettings.creativeNoClipNoProjectileImpact) {
             cir.setReturnValue(false);
         }
