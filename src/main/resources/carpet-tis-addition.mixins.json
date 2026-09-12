@@ -353,6 +353,7 @@
     "rule.creativeInstantTame.WolfEntityMixin",
     "rule.creativeNetherWaterPlacement.BucketItemMixin",
     "rule.creativeNoClipNoProjectileImpact.PlayerMixin",
+    "rule.creativeNoClipNoProjectileImpact.ProjectileMixin",
     "rule.creativeNoItemCooldown.ItemCooldownManagerMixin",
     "rule.creativeNoItemCooldown.PlayerEntityMixin",
     "rule.creativeOpenContainerForcibly.ChestBlockMixin",
