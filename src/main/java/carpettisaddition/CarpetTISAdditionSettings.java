@@ -161,6 +161,11 @@ public class CarpetTISAdditionSettings
 	@Rule(categories = {TIS, CREATIVE})
 	public static boolean creativeNetherWaterPlacement = false;
 
+	//#if MC >= 1.19.4
+	@Rule(categories = {TIS, CREATIVE})
+	public static boolean creativeNoClipNoProjectileImpact = false;
+	//#endif
+
 	@Rule(categories = {TIS, CREATIVE})
 	public static boolean creativeNoItemCooldown = false;
 
