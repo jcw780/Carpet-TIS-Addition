@@ -26,6 +26,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Player.class)
 public abstract class PlayerMixin extends LivingEntity {
@@ -33,8 +36,17 @@ public abstract class PlayerMixin extends LivingEntity {
         super(entityType, level);
     }
 
-    @Override
-    public boolean canBeHitByProjectile() {
-        return super.canBeHitByProjectile() && !(CreativeNoClipHelper.isNoClipPlayer(this) && CarpetTISAdditionSettings.creativeNoClipNoProjectileImpact) ;
+    //#if MC >= 26.1
+    //$$ @Override
+    //$$ public boolean canBeHitByProjectile() {
+    //$$     return super.canBeHitByProjectile() && !(CreativeNoClipHelper.isNoClipPlayer(this) && CarpetTISAdditionSettings.creativeNoClipNoProjectileImpact) ;
+    //$$ }
+    //#else
+    @Inject(method = "canBeHitByProjectile", at=@At("RETURN"), cancellable = true)
+    public void checkCreativeNoClip(CallbackInfoReturnable<Boolean> cir) {
+        if (CreativeNoClipHelper.isNoClipPlayer(this) && CarpetTISAdditionSettings.creativeNoClipNoProjectileImpact) {
+            cir.setReturnValue(false);
+        }
     }
+    //#endif
 }
