@@ -19,15 +19,13 @@
  */
 
 package carpettisaddition.mixins.rule.creativeNoClipNoProjectileImpact;
-import carpet.CarpetSettings;
 import carpettisaddition.CarpetTISAdditionSettings;
+import carpettisaddition.helpers.carpet.tweaks.rule.creativeNoClip.CreativeNoClipHelper;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Abilities;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(Player.class)
 public abstract class PlayerMixin extends LivingEntity {
@@ -37,16 +35,6 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @Override
     public boolean canBeHitByProjectile() {
-        return super.canBeHitByProjectile() && !(CarpetSettings.creativeNoClip && CarpetTISAdditionSettings.creativeNoClipNoProjectileImpact && this.isCreative() && this.getAbilities().flying) ;
-    }
-
-    @Shadow
-    public Abilities getAbilities() {
-        return null;
-    }
-
-    @Shadow
-    public boolean isCreative() {
-        return false;
+        return super.canBeHitByProjectile() && !(CreativeNoClipHelper.isNoClipPlayer(this) && CarpetTISAdditionSettings.creativeNoClipNoProjectileImpact) ;
     }
 }
