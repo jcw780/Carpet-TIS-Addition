@@ -944,7 +944,7 @@ carpettisaddition:
         name: creativeNoClipNoProjectileImpact
         desc: Disables projectiles hitting creative noclipping players
         extra:
-          '0': This rule only exists in Minecraft >= 1.19.4
+          '0': This rule only exists in Minecraft >= 1.15.2
       creativeNoItemCooldown:
         name: creativeNoItemCooldown
         desc: Remove the cooldown of items used by the creative players
