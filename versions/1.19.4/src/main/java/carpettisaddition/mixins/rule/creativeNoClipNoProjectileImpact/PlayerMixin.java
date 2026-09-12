@@ -43,7 +43,7 @@ public abstract class PlayerMixin extends LivingEntity {
     //$$ }
     //#else
     @Inject(method = "canBeHitByProjectile", at=@At("RETURN"), cancellable = true)
-    public void checkCreativeNoClip(CallbackInfoReturnable<Boolean> cir) {
+    public void checkCreativeNoClipNoImpact(CallbackInfoReturnable<Boolean> cir) {
         if (CreativeNoClipHelper.isNoClipPlayer(this) && CarpetTISAdditionSettings.creativeNoClipNoProjectileImpact) {
             cir.setReturnValue(false);
         }

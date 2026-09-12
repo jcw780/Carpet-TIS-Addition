@@ -34,7 +34,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class ProjectileMixin {
     //#if MC < 1.19.4
     @Inject(method = "canHitEntity", at= @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/projectile/Projectile;getOwner()Lnet/minecraft/world/entity/Entity;"), cancellable = true)
-    private void checkCreativeNoClip(Entity target, CallbackInfoReturnable<Boolean> cir) {
+    private void checkCreativeNoClipNoImpact(Entity target, CallbackInfoReturnable<Boolean> cir) {
         if (CreativeNoClipHelper.isNoClipPlayer(target) && CarpetTISAdditionSettings.creativeNoClipNoProjectileImpact) {
             cir.setReturnValue(false);
         }
