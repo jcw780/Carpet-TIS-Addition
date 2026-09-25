@@ -42,11 +42,11 @@ public abstract class PlayerMixin extends LivingEntity {
     //$$     return super.canBeHitByProjectile() && !(CreativeNoClipHelper.isNoClipPlayer(this) && CarpetTISAdditionSettings.creativeNoClipNoProjectileImpact) ;
     //$$ }
     //#else
-    @Inject(method = "canBeHitByProjectile", at=@At("RETURN"), cancellable = true)
+    /*@Inject(method = "canBeHitByProjectile", at=@At("RETURN"), cancellable = true)
     public void checkCreativeNoClipNoProjectileImpact(CallbackInfoReturnable<Boolean> cir) {
         if (CreativeNoClipHelper.isNoClipPlayer(this) && CarpetTISAdditionSettings.creativeNoClipNoProjectileImpact) {
             cir.setReturnValue(false);
         }
-    }
+    }*/
     //#endif
 }
