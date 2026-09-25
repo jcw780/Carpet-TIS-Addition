@@ -355,7 +355,6 @@
     "rule.creativeNoClipNoProjectileImpact.AbstractArrowMixin",
     "rule.creativeNoClipNoProjectileImpact.FireworkRocketEntityMixin",
     "rule.creativeNoClipNoProjectileImpact.FishingHookMixin",
-    "rule.creativeNoClipNoProjectileImpact.PlayerMixin",
     "rule.creativeNoClipNoProjectileImpact.ProjectileMixin",
     "rule.creativeNoClipNoProjectileImpact.ThrowableProjectileMixin",
     "rule.creativeNoItemCooldown.ItemCooldownManagerMixin",
