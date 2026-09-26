@@ -18,24 +18,31 @@
  * along with Carpet TIS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package carpettisaddition.mixins.rule.creativeNoClipNoProjectileImpact;
+package carpettisaddition.mixins.carpet.tweaks.rule.creativeNoClip;
 
 import carpettisaddition.CarpetTISAdditionSettings;
 import carpettisaddition.helpers.carpet.tweaks.rule.creativeNoClip.CreativeNoClipHelper;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.fishing.FishingHook;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
+//#if MC >= 1.16.5
+//$$ import carpettisaddition.utils.compat.DummyClass;
+//$$ @Mixin(DummyClass.class)
+//#else
 
-@Mixin(Projectile.class)
-public abstract class ProjectileMixin {
-    @ModifyReturnValue(method = "canHitEntity", at= @At(value = "RETURN"))
-    private boolean checkCreativeNoClipNoProjectileImpact(boolean original, @Local(argsOnly = true) Entity entity) {
+@Mixin(FishingHook.class)
+//#endif
+public class FishingHookMixin {
+    //#if MC < 1.16.5
+    @ModifyReturnValue(method = "method_18060", at = @At("RETURN"))
+    private static boolean checkCreativeNoClipNoProjectileImpact(boolean original, @Local(argsOnly = true) Entity entity) {
         return original &&
                 !(CreativeNoClipHelper.isNoClipPlayer(entity)
-                && CarpetTISAdditionSettings.creativeNoClipNoProjectileImpact);
+                        && CarpetTISAdditionSettings.creativeNoClipNoProjectileImpact);
     }
+    //#endif
 }

@@ -18,7 +18,7 @@
  * along with Carpet TIS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package carpettisaddition.mixins.rule.creativeNoClipNoProjectileImpact;
+package carpettisaddition.mixins.carpet.tweaks.rule.creativeNoClip;
 
 import carpettisaddition.utils.compat.DummyClass;
 import org.spongepowered.asm.mixin.Mixin;
