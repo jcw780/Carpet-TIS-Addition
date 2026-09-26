@@ -24,7 +24,7 @@ import carpettisaddition.utils.compat.DummyClass;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(DummyClass.class)
-public abstract class ProjectileMixin
+public abstract class AbstractArrowMixin
 {
-    // impl in 1.16.5
+	// impl in mc < 1.16
 }

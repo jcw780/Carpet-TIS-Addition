@@ -940,11 +940,6 @@ carpettisaddition:
         desc: Allow creative players place water via water bucket in nether
         extra:
           '0': Technically this rule applies to all ultrawarm dimensions
-      creativeNoClipNoProjectileImpact:
-        name: creativeNoClipNoProjectileImpact
-        desc: Disables projectiles hitting creative noclipping players
-        extra:
-          '0': This rule only exists in Minecraft >= 1.15.2
       creativeNoItemCooldown:
         name: creativeNoItemCooldown
         desc: Remove the cooldown of items used by the creative players

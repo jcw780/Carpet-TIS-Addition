@@ -20,7 +20,6 @@
 
 package carpettisaddition.mixins.carpet.tweaks.rule.creativeNoClip;
 
-import carpettisaddition.CarpetTISAdditionSettings;
 import carpettisaddition.helpers.carpet.tweaks.rule.creativeNoClip.CreativeNoClipHelper;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -29,20 +28,12 @@ import net.minecraft.world.entity.projectile.FireworkRocketEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-//#if MC >= 1.16.5
-//$$ import carpettisaddition.utils.compat.DummyClass;
-//$$ @Mixin(DummyClass.class)
-//#else
-
 @Mixin(FireworkRocketEntity.class)
-//#endif
-public class FireworkRocketEntityMixin {
-    //#if MC < 1.16.5
-    @ModifyReturnValue(method = "method_18073", at = @At("RETURN"))
-    private static boolean checkCreativeNoClipNoProjectileImpact(boolean original, @Local(argsOnly = true) Entity entity) {
-        return original &&
-                !(CreativeNoClipHelper.isNoClipPlayer(entity)
-                        && CarpetTISAdditionSettings.creativeNoClipNoProjectileImpact);
-    }
-    //#endif
+public class FireworkRocketEntityMixin
+{
+	@ModifyReturnValue(method = "method_18073", at = @At("RETURN"))  // lambda method in tick
+	private static boolean checkCreativeNoClipNoProjectileImpact_firework(boolean original, @Local(argsOnly = true) Entity entity)
+	{
+		return original && !CreativeNoClipHelper.isNoClipPlayer(entity);
+	}
 }

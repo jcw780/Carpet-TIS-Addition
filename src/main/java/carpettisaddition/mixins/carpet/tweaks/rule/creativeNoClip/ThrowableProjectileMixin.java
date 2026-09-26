@@ -20,7 +20,6 @@
 
 package carpettisaddition.mixins.carpet.tweaks.rule.creativeNoClip;
 
-import carpettisaddition.CarpetTISAdditionSettings;
 import carpettisaddition.helpers.carpet.tweaks.rule.creativeNoClip.CreativeNoClipHelper;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -29,20 +28,12 @@ import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-//#if MC >= 1.16.5
-//$$ import carpettisaddition.utils.compat.DummyClass;
-//$$ @Mixin(DummyClass.class)
-//#else
-
 @Mixin(ThrowableProjectile.class)
-//#endif
-public class ThrowableProjectileMixin {
-    //#if MC < 1.16.5
-    @ModifyReturnValue(method = {"method_18081", "method_18080"}, at = @At("RETURN"))
-    private static boolean checkCreativeNoClipNoProjectileImpact(boolean original, @Local(argsOnly = true) Entity entity) {
-        return original &&
-                !(CreativeNoClipHelper.isNoClipPlayer(entity)
-                        && CarpetTISAdditionSettings.creativeNoClipNoProjectileImpact);
-    }
-    //#endif
+public abstract class ThrowableProjectileMixin
+{
+	@ModifyReturnValue(method = {"method_18081", "method_18080"}, at = @At("RETURN"))  // lambda method in tick
+	private static boolean checkCreativeNoClipNoProjectileImpact_throwable(boolean original, @Local(argsOnly = true) Entity entity)
+	{
+		return original && !CreativeNoClipHelper.isNoClipPlayer(entity);
+	}
 }
