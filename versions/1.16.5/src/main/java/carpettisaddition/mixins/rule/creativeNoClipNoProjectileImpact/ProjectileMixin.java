@@ -22,20 +22,20 @@ package carpettisaddition.mixins.rule.creativeNoClipNoProjectileImpact;
 
 import carpettisaddition.CarpetTISAdditionSettings;
 import carpettisaddition.helpers.carpet.tweaks.rule.creativeNoClip.CreativeNoClipHelper;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.projectile.Projectile;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 
 @Mixin(Projectile.class)
 public abstract class ProjectileMixin {
-    @Inject(method = "canHitEntity", at= @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/projectile/Projectile;getOwner()Lnet/minecraft/world/entity/Entity;"), cancellable = true)
-    private void checkCreativeNoClipNoProjectileImpact(Entity target, CallbackInfoReturnable<Boolean> cir) {
-        if (CreativeNoClipHelper.isNoClipPlayer(target) && CarpetTISAdditionSettings.creativeNoClipNoProjectileImpact) {
-            cir.setReturnValue(false);
-        }
+    @ModifyReturnValue(method = "canHitEntity", at= @At(value = "RETURN"))
+    private boolean checkCreativeNoClipNoProjectileImpact(boolean original, @Local(argsOnly = true) Entity entity) {
+        return original &&
+                !(CreativeNoClipHelper.isNoClipPlayer(entity)
+                && CarpetTISAdditionSettings.creativeNoClipNoProjectileImpact);
     }
 }

@@ -30,19 +30,19 @@ import carpettisaddition.CarpetTISAdditionSettings;
 import carpettisaddition.helpers.carpet.tweaks.rule.creativeNoClip.CreativeNoClipHelper;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.sugar.Local;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ThrowableProjectile.class)
 //#endif
 public class ThrowableProjectileMixin {
     //#if MC < 1.16.5
-    @Inject(method = {"method_18081", "method_18080"}, at = @At("HEAD"), cancellable = true)
-    private static void checkCreativeNoClipNoProjectileImpact(Entity entity, CallbackInfoReturnable<Boolean> cir) {
-        if (CreativeNoClipHelper.isNoClipPlayer(entity) && CarpetTISAdditionSettings.creativeNoClipNoProjectileImpact) {
-            cir.setReturnValue(false);
-        }
+    @ModifyReturnValue(method = {"method_18081", "method_18080"}, at = @At("RETURN"))
+    private static boolean checkCreativeNoClipNoProjectileImpact(boolean original, @Local(argsOnly = true) Entity entity) {
+        return original &&
+                !(CreativeNoClipHelper.isNoClipPlayer(entity)
+                        && CarpetTISAdditionSettings.creativeNoClipNoProjectileImpact);
     }
     //#endif
 }
